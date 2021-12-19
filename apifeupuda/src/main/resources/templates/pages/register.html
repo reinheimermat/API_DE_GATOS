@@ -4,10 +4,139 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" th:href="@{img/cat.png}" type="image/x-icon">
+    <link rel="stylesheet" th:href="@{style.css}">
     <title>API Feupuda</title>
   </head>
   <body>
-    <h1>Olaa</h1>
-		<!-- Conteúdo da página -->
+  <header>
+      <nav>
+          <a class="logo" th:href="@{register/feupudos}">API Feupuda!</a>
+          <ul class="nav-list">
+              <li><a th:href="@{register/feupudos}">Home</a></li>
+              <li><a href="https://www.peritoanimal.com.br/racas-de-gatos.html" target="_blank">Raças</a></li>
+              <li><a href="https://blog.cobasi.com.br/tudo-sobre-gato/#:~:text=Entre%20os%20principais%20cuidados%20com%20os%20gatos%2C%20est%C3%A1,certo%2C%20evitando%20sujeira%20pela%20casa%20e%20a%20constipa%C3%A7%C3%A3o." target="_blank">Cuidados</a></li>
+              <li><a href="https://blog.cobasi.com.br/curiosidades-sobre-gatos/" target="_blank">info Extra</a></li>
+              <li><a href="https://mail.google.com/mail/u/0/?hl=pt-BR#inbox" target="_blank">Fale Conosco</a></li>
+          </ul>
+      </nav>
+  </header>
+  <main>
+    <section class="formulario">
+      <form method="post" th:action="@{/feupudos}" th:object="${objCat}">
+        <div class="card">
+
+          <div class="card-top">
+
+            <img src="https://image.flaticon.com/icons/png/512/3570/3570821.png" class="imglogin">
+
+            <h2 class="titulo">Cadastre Seu Gato:</h2>
+            <p class="subtitulo">Cadraste aqui o seu feupudo de estimação!</p>
+          </div>
+
+          <div class="card-group">
+            <label>Nome:</label>
+            <input type="text" th:field="*{name}" placeholder="Digite o nome do gato" required/>
+
+            <label>Pelagem:</label>
+            <select th:field="*{breed}">
+              <option th:each="breed : ${T(br.com.matheusreinheimer.apifeupuda.model.Breed).values()}" th:value="${breed}" th:text="${breed}"></option>
+            </select>
+
+            <label>Raça:</label>
+            <select th:field="*{fur}">
+              <option th:each="fur : ${T(br.com.matheusreinheimer.apifeupuda.model.Fur).values()}" th:value="${fur}" th:text="${fur}"></option>
+            </select>
+          </div>
+
+          <div class="card-group">
+            <button type="submit" class="cadastrar">Cadastrar Gato</button>
+          </div>
+
+          <div class="div-resetar">
+            <button type="reset" class="resetar">Limpar Campos</button>
+          </div>
+          
+        </div>
+
+      </form>
+    </section>
+
+    <section class="cuidados">
+      <h1>Cuidados e Dicas Sobre Os Gatos</h1>
+
+      <h2>Gatos Filhotes:</h2>
+            
+      <p>O ideal é adotar um gato após seus 5 meses após o nascimento. Esse tempo é essecial para que o filhote aprenda a conviver em conjunto com seus irmãos e mãe, e saber seus limites de brincadeira e briga. Também os 5 meses já é a idade ideal para castração felina.</p>
+            
+      <h2>Importancia Da Castração:</h2>
+            
+      <p>A castração deve ser feita, para evitar cios, grávides endesejada, dst's, problemas comportamentais, marcações de territórios e fugas que ocasionam brigas entre outros gatos. A castração aumenta a espectativa de vida do seu gato.</p>
+            
+      <h2>Alimentação:</h2>
+
+      <p>É muito comum termos a imegem de um gato tomando leite, mas isso é MITO, apenas quando filhotes isso é possível, gatos adultos são intolerantes a lactose, assim como qualquer mamifero (fora os humanos que se aconstumaram a ingestão de leite após a idade adulta). Gatos são metodicos e se acostumam a rotinas, então quando chega a hora de comer ele vai fazer questão de te deixar sabendo. Se a ração ficar muito tempo esposta ela fica murcha e sem gosto, isso faz com que o gato não tenha intece nela, por isso é bom não encher o pote. A água recebe a mesma regra, deve ser trocada com frequência, ou o potinho deve ser substituido por uma fonte com água corrente.</p>
+
+      <h2>Telas nas Janelas:</h2>
+
+      <p>É muito recomendável telas janelas para evitar mais ainda fugas, assim aumentando a espectativa de vida do seu gato. A espectativa de vida de um gato fertil e com acesso à rua é de 2 a 4 anos, e a de um gato castrado e sem acesso à rua é de 10 a 15 anos.</p>
+
+      <h2>Banho:</h2>
+
+      <p>Gatos NÃO precisam tomar banho, eles passam horas de seu dia se lambendo, deixando os pelos limpos e em ordem. As únicas ocasiões em que se deve dar banho em um gato é qunado é receitado por um veterinário ou quando esse gato está tão sujo a ponto de mudar a cor de seu pelo.</p>
+    
+      <h2>Cuidados Com o Banho:</h2>
+
+      <p>Se for necessario o banho no seu gato siga as seguintes intruções: 
+        1° Encher uma banheira/bacia com água morna (nem quente, nem fria).
+        2° Nunca colocar o gato na bacia, ultilize um recipiente (um copo) para largar a água coisadosamente sobre o gato
+        3° Na hora de secar use uma toalha para secar o máximo possível e um secador o mínimo de tempo possível.
+        4° Dica boa é deixar o gato no sol, mas é necessário deixar o gato totalmente seco para evitar doenças de pele.</p>
+      
+      <p>A parte mais importante é levalo no veterinario sempre que algo estiver fora do comum. Gatos também precisa de vacinas e remedios contra pulga, vermes, etc.</p>
+    </section>
+    <section class="info">
+      <div>
+        <h1>Links Externos:</h1>
+
+        <table class="tabela" border="0">
+           <tr>
+              <td>Produtos para Pets</td>
+              <td>Clínicas Veterinárias</td>
+          </tr>
+           <tr>
+               <td>
+                   <button class="pointer">
+                      <a href="https://www.petz.com.br/?gclid=CjwKCAiAh_GNBhAHEiwAjOh3ZH9Hg7GKsjTP4KtljUb4M6rjchJp-a89ivtnfeYHkbGf1wvJo4hwoRoCkgUQAvD_BwE" target="_blank"><img src="https://cdn3.iconfinder.com/data/icons/catcommerce-white/120/cart-512.png" alt="um gato marrom dentro de um cesto de compras" width="200"></a>
+                  </button>
+              </td>      
+              <td><button class="pointer">
+                  <a href="https://www.google.com/search?client=opera-gx&q=veterinárias+próximas&sourceid=opera&ie=UTF-8&oe=UTF-8" target="_blank"><img src="https://cdn-icons-png.flaticon.com/512/3677/3677108.png" alt="um médico Veterinário e um gato laranja" width="200"></a>
+              </button></td>     
+          </tr>
+         </table>
+        </div>
+    </section>
+    <section class="contato">
+      <div>
+        <h1>Contato:</h1>
+
+        <table class="center" border="1">
+            <tr>
+                <td>Nome</td>
+                <td>Email</td>
+            </tr>
+            <tr>
+                <td>Isadora Vargas</td>
+                <td>tarraynama@gmail.com</td>
+            </tr>
+            <tr>
+                <td>Matheus Reinheimer</td>
+                <td>matheusreinheimer@gmail.com</td>
+            </tr>
+        </table>
+    </div> 
+    </section>
+  </main>
 	</body>
 </html>
